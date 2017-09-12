@@ -2,12 +2,14 @@ const charactersAPI = new APIHandler("http://ih-api.herokuapp.com")
 
 $(document).ready( () => {
   $('#fetch-all').on('click', (e) => {
+    $('.characters-container .character-info').remove()
     charactersAPI.getFullList()
-    .then((p)=>{console.log(p)})
+    .then((p)=>{showAll(p)})
 
   })
 
   $('#fetch-one').on('click', (e) => {
+    $('.characters-container .character-info').remove()
     const myId = $('#character-id').val()
     charactersAPI.getOneRegister(myId).then((p)=>showOneCharacter(p))
   })
@@ -43,8 +45,27 @@ $(document).ready( () => {
 
 
 function showOneCharacter(character){
-  $('.name').text(character.name)
-  $('.occupation').text(character.occupation)
-  $('.weapon').text(character.weapon)
-  $('.debt').text(character.debt)
+  let chainfo = $('<div>').addClass('character-info')
+  let divName = $('<div>').addClass('name').text(character.name)
+  let divOccupation = $('<div>').addClass('occupation').text(character.occupation)
+  let divDebt = $('<div>').addClass('debt').text(character.debt)
+  let divWeapon = $('<div>').addClass('weapon').text(character.weapon)
+  let divId = $('<div>').addClass('id').text(character.id)
+  $(chainfo).append(divName).append(divOccupation).append(divDebt).append(divWeapon).append(divId)
+  $('.characters-container').append(chainfo)
+}
+
+function showAll(arr){
+  $('.character-info').remove()
+  arr.forEach((e)=>{
+    let chainfo = $('<div>').addClass('character-info')
+    let divName = $('<div>').addClass('name').text(e.name)
+    let divOccupation = $('<div>').addClass('occupation').text(e.occupation)
+    let divDebt = $('<div>').addClass('debt').text(e.debt)
+    let divWeapon = $('<div>').addClass('weapon').text(e.weapon)
+    let divId = $('<div>').addClass('id').text(e.id)
+    $(chainfo).append(divName).append(divOccupation).append(divDebt).append(divWeapon).append(divId)
+    $('.characters-container').append(chainfo)
+
+  })
 }
