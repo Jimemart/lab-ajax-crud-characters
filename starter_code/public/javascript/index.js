@@ -40,6 +40,7 @@ $(document).ready( () => {
       debt : $('#new-debt').val()
     }
     charactersAPI.createOneRegister(characterInfo)
+    $('#send-data').css("background","green")
   })
 })
 

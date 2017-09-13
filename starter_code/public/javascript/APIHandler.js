@@ -14,7 +14,7 @@ class APIHandler {
   createOneRegister (characterInfo) {
 return $.post(`${this.BASE_URL}/characters`,{
   name : characterInfo.name,
-  occupation : characterInfo.occupation, 
+  occupation : characterInfo.occupation,
   weapon : characterInfo.weapon,
   debt :characterInfo.debt
 })
@@ -27,6 +27,7 @@ return $.post(`${this.BASE_URL}/characters`,{
       data: character,
       succes: function(){
         console.log("success")
+        $('#update-data').css("background", "green")
       },
       error: function(err){
         console.log(err)
@@ -39,7 +40,9 @@ return $.post(`${this.BASE_URL}/characters`,{
       url:`${this.BASE_URL}/characters/${id}`,
       method:'DELETE',
       success : function(){
+        $('#delete-one').css("background","green")
         console.log("success")
+
       },
       error : function(err){
         console.log(err)
